@@ -1,5 +1,15 @@
 import argparse
-import json
+from gendiff.parser import parse
+from gendiff.find_diff import find_diff
+
+
+def generate_diff(file_path1, file_path2):
+    data1 = parse(file_path1)
+    data2 = parse(file_path2)
+
+    result = find_diff(data1, data2)
+    print(result)
+    return None
 
 
 def main():
@@ -13,12 +23,10 @@ def main():
 
     args = parser.parse_args()
 
-    path1 = args.first_file
-    path2 = args.second_file
+    file_path1 = args.first_file
+    file_path2 = args.second_file
 
-    file1 = json.load(open(path1))
-    file2 = json.load(open(path2))
-
+    generate_diff(file_path1, file_path2)
 
 
 if __name__ == '__main__':
