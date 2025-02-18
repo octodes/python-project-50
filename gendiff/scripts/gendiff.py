@@ -7,9 +7,7 @@ def generate_diff(file_path1, file_path2):
     data1 = parse(file_path1)
     data2 = parse(file_path2)
 
-    result = find_diff(data1, data2)
-    print(result)
-    return None
+    return find_diff(data1, data2)
 
 
 def main():
@@ -26,7 +24,7 @@ def main():
     file_path1 = args.first_file
     file_path2 = args.second_file
 
-    generate_diff(file_path1, file_path2)
+    print(generate_diff(file_path1, file_path2))
 
 
 if __name__ == '__main__':

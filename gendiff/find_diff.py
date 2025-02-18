@@ -4,8 +4,6 @@ def find_diff(data1, data2):
     )
     diff = []
 
-    print(keys)
-
     for key in keys:
         if key not in data1:
             diff.append(f'+ {key}: {data2[key]}')
