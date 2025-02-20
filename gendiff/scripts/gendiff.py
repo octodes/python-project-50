@@ -1,14 +1,20 @@
 import argparse
 
 from gendiff.find_diff import find_diff
+from gendiff.formatters.stylish import stylish
 from gendiff.parser import parse
 
 
-def generate_diff(file_path1, file_path2):
+def generate_diff(file_path1, file_path2, format_name='stylish'):
     data1 = parse(file_path1)
     data2 = parse(file_path2)
+    diff = find_diff(data1, data2)
 
-    return find_diff(data1, data2)
+    match format_name:
+        case 'stylish':
+            return stylish(diff)
+        case _:
+            raise ValueError(f"Unknown format type: {format_name}")
 
 
 def main():
@@ -21,7 +27,10 @@ def main():
     parser.add_argument(
         '-f',
         '--format',
-        required=False,
+        default='stylish',
+        choices=[
+            'stylish',
+        ],
         help='set format of output',
     )
 
@@ -29,8 +38,9 @@ def main():
 
     file_path1 = args.first_file
     file_path2 = args.second_file
+    formatter = args.format
 
-    print(generate_diff(file_path1, file_path2))
+    print(generate_diff(file_path1, file_path2, formatter))
 
 
 if __name__ == '__main__':
