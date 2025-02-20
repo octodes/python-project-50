@@ -21,6 +21,10 @@ def read_file(file_path):
      make_path("expected_stylish.txt")),
     (make_path("file3.yml"), make_path("file4.yaml"), 'stylish',
      make_path("expected_stylish.txt")),
+    (make_path("file3.json"), make_path("file4.json"), 'plain',
+     make_path("expected_plain.txt")),
+    (make_path("file3.yml"), make_path("file4.yaml"), 'plain',
+     make_path("expected_plain.txt")),
 ])
 def test_generate_diff(file1, file2, formatter, expected):
     diff = generate_diff(file1, file2, formatter)

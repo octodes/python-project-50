@@ -1,6 +1,7 @@
 import argparse
 
 from gendiff.find_diff import find_diff
+from gendiff.formatters.plain import plain
 from gendiff.formatters.stylish import stylish
 from gendiff.parser import parse
 
@@ -13,6 +14,8 @@ def generate_diff(file_path1, file_path2, format_name='stylish'):
     match format_name:
         case 'stylish':
             return stylish(diff)
+        case 'plain':
+            return plain(diff)
         case _:
             raise ValueError(f"Unknown format type: {format_name}")
 
@@ -30,6 +33,7 @@ def main():
         default='stylish',
         choices=[
             'stylish',
+            'plain',
         ],
         help='set format of output',
     )
