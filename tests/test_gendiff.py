@@ -25,6 +25,10 @@ def read_file(file_path):
      make_path("expected_plain.txt")),
     (make_path("file3.yml"), make_path("file4.yaml"), 'plain',
      make_path("expected_plain.txt")),
+    (make_path("file3.json"), make_path("file4.json"), 'json',
+     make_path("expected_json.txt")),
+    (make_path("file3.yml"), make_path("file4.yaml"), 'json',
+     make_path("expected_json.txt")),
 ])
 def test_generate_diff(file1, file2, formatter, expected):
     diff = generate_diff(file1, file2, formatter)
