@@ -9,13 +9,13 @@ def find_diff(data1, data2):
             diff.append({
                 'key': key,
                 'status': 'added',
-                'value': data2[key],
+                'new_value': data2[key],
             })
         elif key not in data2:
             diff.append({
                 'key': key,
                 'status': 'removed',
-                'value': data1[key],
+                'old_value': data1[key],
             })
         elif isinstance(data1[key], dict) and isinstance(data2[key], dict):
             diff.append({

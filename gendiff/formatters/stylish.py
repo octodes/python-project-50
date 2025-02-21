@@ -20,8 +20,6 @@ def to_str(value, depth):
 
 
 def line_forming(dictionary, key, depth, sign):
-    if to_str(dictionary[key], depth + DEFAULT_INDENT) == '':
-        return f'{" " * depth}{sign}{dictionary["key"]}:'
     return f'{" " * depth}{sign}{dictionary["key"]}: ' \
            f'{to_str(dictionary[key], depth + DEFAULT_INDENT)}'
 
@@ -37,22 +35,18 @@ def build_stylish_iter(diff, depth=0):
 
         if dictionary['status'] == 'added':
             lines.append(line_forming(
-                dictionary, 'value',
+                dictionary, 'new_value',
                 depth, sign='  + '
             ))
 
-        if dictionary['status'] == 'removed':
+        if dictionary['status'] == 'removed' or dictionary[
+                'status'] == 'changed':
             lines.append(line_forming(
-                dictionary, 'value',
+                dictionary, 'old_value',
                 depth, sign='  - '
             ))
 
         if dictionary['status'] == 'changed':
-            lines.append(
-                line_forming(
-                    dictionary, 'old_value',
-                    depth, sign='  - '
-                ))
             lines.append(
                 line_forming(
                     dictionary, 'new_value',

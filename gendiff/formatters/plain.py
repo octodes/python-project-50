@@ -3,6 +3,8 @@ def to_str(value):
         return "[complex value]"
     if isinstance(value, bool):
         return str(value).lower()
+    if isinstance(value, int):
+        return value
     if value is None:
         return 'null'
     return f"'{value}'"
@@ -15,7 +17,7 @@ def build_plain_iter(diff, path=""):
         if dictionary['status'] == 'added':
             lines.append(f"Property '{property}' "\
                          f"was added with value: "\
-                         f"{to_str(dictionary['value'])}")
+                         f"{to_str(dictionary['new_value'])}")
 
         if dictionary['status'] == 'removed':
             lines.append(f"Property '{property}' was removed")
