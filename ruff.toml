@@ -10,4 +10,4 @@ select = ["E", "F", "I", "C90"]
 
 [lint.mccabe]
 # Unlike Flake8, default to a complexity level of 10.
-max-complexity = 6
+max-complexity = 10
